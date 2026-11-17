@@ -1,0 +1,1 @@
+{"error": "opencli exit 1: {\"ok\":false,\"error\":{\"code\":\"COMMAND_EXEC\",\"message\":\"HTTP 429: SearchTimeline fetch failed — rate-limited by Twitter (session quota); retry after cooldown (typically 15-30 min)\",\"exitCode\":1}}"}
