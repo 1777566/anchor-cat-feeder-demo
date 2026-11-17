@@ -1,0 +1,46 @@
+品类,功能,样本数,提到的比例%,有该功能·价格中位数,无该功能·价格中位数,提到的品牌
+智能喂食器,App远程控制,26,50,139.99,159.99,"CATLINK, PETKIT, Petlibro, UAHPET"
+智能喂食器,摄像头,26,46,174.99,129.99,"PETKIT, Petlibro"
+智能喂食器,AI识别,26,46,179.99,134.99,"CATLINK, PETKIT, Petlibro"
+智能喂食器,多猫区分,26,38,179.985,129.99,"CATLINK, PETKIT, Petlibro"
+智能喂食器,体重/如厕记录,26,0,,149.99,
+智能喂食器,尿液/健康预警,26,12,129.0,149.99,CATLINK
+智能喂食器,除味/杀菌,26,62,159.99,139.99,"CATLINK, Meowant, PETKIT, Petlibro"
+智能喂食器,开放式设计,26,0,,149.99,
+智能喂食器,无线/电池,26,15,279.975,144.99,Petlibro
+智能喂食器,不锈钢,26,12,159.99,149.99,"Meowant, Petlibro, UAHPET"
+智能喂食器,湿粮/鲜食,26,19,169.99,139.99,"Meowant, Neakasa, Petlibro, UAHPET"
+智能喂食器,安全防夹,26,12,159.99,149.99,"Meowant, Petlibro"
+智能喂食器,静音,26,8,139.99,149.99,PETKIT
+智能喂食器,免订阅,26,0,,149.99,
+智能喂食器,智能家居生态,26,0,,149.99,
+智能猫砂盆,App远程控制,50,54,369.99,445.99,"CATLINK, Meowant, Neakasa, PAWBBY, PETKIT, Petlibro"
+智能猫砂盆,摄像头,50,24,574.495,379.99,"CATLINK, PETKIT, Petlibro"
+智能猫砂盆,AI识别,50,26,499.99,389.99,"CATGENIE, CATLINK, Meowant, PETKIT"
+智能猫砂盆,多猫区分,50,14,699.0,379.99,"CATLINK, PETKIT, Petlibro"
+智能猫砂盆,体重/如厕记录,50,46,379.99,399.99,"CATLINK, Meowant, Neakasa, PAWBBY, PETKIT"
+智能猫砂盆,尿液/健康预警,50,46,349.99,399.99,"CATLINK, Meowant, PETKIT, Petlibro"
+智能猫砂盆,除味/杀菌,50,94,389.99,375.0,"CATLINK, Meowant, Neakasa, PAWBBY, PETKIT, Petlibro"
+智能猫砂盆,开放式设计,50,42,328.99,549.99,"CATLINK, Meowant, Neakasa, PETKIT"
+智能猫砂盆,无线/电池,50,6,828.98,379.99,Petlibro
+智能猫砂盆,不锈钢,50,2,79.99,389.99,Meowant
+智能猫砂盆,湿粮/鲜食,50,2,839.97,389.99,Petlibro
+智能猫砂盆,安全防夹,50,48,359.99,469.495,"CATLINK, Meowant, Neakasa, PETKIT"
+智能猫砂盆,静音,50,28,379.99,394.99,"Meowant, PETKIT"
+智能猫砂盆,免订阅,50,2,699.0,389.99,CATLINK
+智能猫砂盆,智能家居生态,50,2,439.0,389.99,CATLINK
+智能饮水机,App远程控制,31,32,89.99,99.99,"CATLINK, PETKIT, Petlibro, UAHPET"
+智能饮水机,摄像头,31,16,249.99,87.325,"PETKIT, Petlibro"
+智能饮水机,AI识别,31,32,204.985,85.59,"CATLINK, PETKIT, Petlibro"
+智能饮水机,多猫区分,31,6,112.49,89.99,Petlibro
+智能饮水机,体重/如厕记录,31,0,,99.99,
+智能饮水机,尿液/健康预警,31,3,55.99,99.99,CATLINK
+智能饮水机,除味/杀菌,31,81,89.06,224.99,"CATLINK, Meowant, PETKIT, Petlibro, UAHPET"
+智能饮水机,开放式设计,31,0,,99.99,
+智能饮水机,无线/电池,31,58,80.485,189.98,"CATLINK, Meowant, PETKIT, Petlibro, UAHPET"
+智能饮水机,不锈钢,31,26,83.285,135.98,"Meowant, PETKIT, Petlibro, UAHPET"
+智能饮水机,湿粮/鲜食,31,0,,99.99,
+智能饮水机,安全防夹,31,13,83.285,124.99,UAHPET
+智能饮水机,静音,31,35,71.99,145.985,"CATLINK, PETKIT, Petlibro, UAHPET"
+智能饮水机,免订阅,31,0,,99.99,
+智能饮水机,智能家居生态,31,0,,99.99,
