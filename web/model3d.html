@@ -1,0 +1,77 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  html,body{margin:0;background:#f4eee4;font-family:-apple-system,"PingFang SC",sans-serif;overflow:hidden}
+  #hint{position:absolute;left:14px;bottom:12px;font-size:12px;color:#8a8076}
+  #btns{position:absolute;right:12px;top:12px;display:flex;gap:6px}
+  button{border:1px solid #d8ccb8;background:#fff;border-radius:8px;padding:5px 10px;font-size:12px;cursor:pointer}
+</style></head>
+<body>
+<div id="btns"><button id="explode">拆开看结构</button><button id="spin">自动旋转</button></div>
+<div id="hint">拖动旋转 · 滚轮缩放 · 程序化 3D 模型（与设计图同一套尺寸比例）</div>
+<script>/*THREEJS*/</script>
+<script>
+const W=Math.max(innerWidth,document.documentElement.clientWidth,600),H=Math.max(innerHeight,420), scene=new THREE.Scene();
+const cam=new THREE.PerspectiveCamera(35,W/H,0.1,100); cam.position.set(0,1.7,5.0);
+const r=new THREE.WebGLRenderer({antialias:true}); r.setSize(W,H); r.setPixelRatio(devicePixelRatio);
+r.shadowMap.enabled=true; document.body.appendChild(r.domElement);
+scene.add(new THREE.HemisphereLight(0xfff8ee,0xb8a990,0.9));
+const key=new THREE.DirectionalLight(0xffffff,0.8); key.position.set(-3,5,4); key.castShadow=true; scene.add(key);
+
+const shell=new THREE.MeshStandardMaterial({color:0xf3eee6,roughness:0.85});
+const oat=new THREE.MeshStandardMaterial({color:0xcdbfa8,roughness:0.9});
+const steel=new THREE.MeshStandardMaterial({color:0xd9dcdf,metalness:0.95,roughness:0.25});
+const ink=new THREE.MeshStandardMaterial({color:0x1b1b1b,roughness:0.4});
+const glass=new THREE.MeshStandardMaterial({color:0xffffff,transparent:true,opacity:0.28,roughness:0.05});
+const kib=new THREE.MeshStandardMaterial({color:0x8a5a33,roughness:0.9});
+const led=new THREE.MeshBasicMaterial({color:0xffd9a0});
+
+const g=new THREE.Group(); scene.add(g);
+const parts={};
+r.setClearColor(0xf4eee4,1);
+// 机身：下半部竖直、上半部拱顶（与主视觉图一致），旋转体
+const prof=[new THREE.Vector2(0.01,0)]; for(let i=0;i<=40;i++){const y=i/40*1.95; let rad;
+  if(y<1.0){rad=1.2-0.04*Math.pow(1-y,4);} else {const u=(y-1.0)/0.95; rad=1.2*Math.pow(Math.max(1-Math.pow(u,2.2),0),0.5);}
+  prof.push(new THREE.Vector2(Math.max(rad,0.01),y));}
+const body=new THREE.Mesh(new THREE.LatheGeometry(prof,72),shell); body.scale.set(1,1,0.85); body.position.y=0.25; body.castShadow=true; g.add(body); parts.body=body;
+// 燕麦色底座（内含配重）
+const base=new THREE.Mesh(new THREE.CylinderGeometry(1.2,1.22,0.28,72),oat); base.scale.z=0.85; base.position.y=0.14; base.castShadow=true; g.add(base); parts.base=base;
+const ballast=new THREE.Mesh(new THREE.BoxGeometry(1.0,0.12,0.6),new THREE.MeshStandardMaterial({color:0x8d9399,metalness:0.7,roughness:0.4})); ballast.position.y=0.14; ballast.visible=false; g.add(ballast); parts.ballast=ballast;
+// LED 灯带
+const strip=new THREE.Mesh(new THREE.TorusGeometry(1.205,0.014,8,120,Math.PI),led); strip.rotation.x=Math.PI/2; strip.position.y=1.0; strip.scale.set(1,0.85,1); g.add(strip); parts.strip=strip;
+// 顶部前方墨水屏 + 正上方旋钮
+const screen=new THREE.Mesh(new THREE.BoxGeometry(0.62,0.03,0.36),ink); screen.position.set(-0.2,1.82,0.8); screen.rotation.x=-0.62; g.add(screen); parts.screen=screen;
+const knob=new THREE.Mesh(new THREE.CylinderGeometry(0.2,0.2,0.16,48),steel); knob.position.set(0,2.24,0); g.add(knob); parts.knob=knob;
+// 右上侧透明粮仓窗口（贴合机身曲面）+ 猫粮
+const win=new THREE.Mesh(new THREE.CylinderGeometry(1.215,1.215,0.62,48,1,true,Math.PI*0.18,Math.PI*0.28),glass); win.scale.z=0.85; win.position.y=1.5; g.add(win); parts.win=win;
+for(let i=0;i<90;i++){const a=Math.PI*(0.2+Math.random()*0.24); const rr=0.95+Math.random()*0.2; const k=new THREE.Mesh(new THREE.SphereGeometry(0.055,8,6),kib); k.position.set(rr*Math.sin(a),1.22+Math.random()*0.55,rr*Math.cos(a)*0.85); g.add(k);}
+// 前方不锈钢碗 + 称重传感器
+const bowlBase=new THREE.Mesh(new THREE.CylinderGeometry(0.62,0.6,0.26,64),oat); bowlBase.position.set(0,0.13,1.25); bowlBase.castShadow=true; g.add(bowlBase); parts.bowlBase=bowlBase;
+const bowl=new THREE.Mesh(new THREE.CylinderGeometry(0.55,0.4,0.2,64,1,true),steel); bowl.position.set(0,0.33,1.25); g.add(bowl); parts.bowl=bowl;
+const rim=new THREE.Mesh(new THREE.TorusGeometry(0.56,0.025,12,64),new THREE.MeshStandardMaterial({color:0xbfc3c6,roughness:0.5})); rim.rotation.x=Math.PI/2; rim.position.set(0,0.43,1.25); g.add(rim); parts.rim=rim;
+const cell=new THREE.Mesh(new THREE.BoxGeometry(0.5,0.05,0.08),new THREE.MeshStandardMaterial({color:0xb0b5ba,metalness:0.8,roughness:0.3})); cell.position.set(0,0.25,1.25); cell.visible=false; g.add(cell); parts.cell=cell;
+// 地面阴影
+const floor=new THREE.Mesh(new THREE.PlaneGeometry(20,20),new THREE.ShadowMaterial({opacity:0.12})); floor.rotation.x=-Math.PI/2; floor.receiveShadow=true; scene.add(floor);
+
+// 交互：拖动旋转、滚轮缩放、爆炸视图
+let drag=false,px=0,py=0,rotY=-0.6,rotX=0.05,auto=true,exploded=false,ex=0;
+addEventListener('pointerdown',e=>{drag=true;px=e.clientX;py=e.clientY;auto=false;});
+addEventListener('pointerup',()=>drag=false);
+addEventListener('pointermove',e=>{if(!drag)return; rotY+=(e.clientX-px)*0.01; rotX=Math.max(-0.4,Math.min(0.6,rotX+(e.clientY-py)*0.005)); px=e.clientX; py=e.clientY;});
+addEventListener('wheel',e=>{cam.position.z=Math.max(3.5,Math.min(10,cam.position.z+e.deltaY*0.003));});
+document.getElementById('spin').onclick=()=>auto=!auto;
+document.getElementById('explode').onclick=e=>{exploded=!exploded; e.target.textContent=exploded?'合上':'拆开看结构';};
+function tick(){
+  if(auto) rotY+=0.004;
+  ex+=((exploded?1:0)-ex)*0.08;
+  parts.screen.position.y=1.82+ex*0.9; parts.knob.position.y=2.24+ex*1.0;
+  parts.body.position.y=0.25+ex*0.45; parts.strip.position.y=1.0+ex*0.45; parts.win.position.x=ex*0.6;
+  parts.bowl.position.y=0.33+ex*0.55; parts.rim.position.y=0.43+ex*0.55;
+  parts.cell.visible=ex>0.2; parts.ballast.visible=ex>0.2; parts.ballast.position.y=0.14-ex*0.0; parts.base.material.opacity=1;
+  g.rotation.y=rotY; g.rotation.x=rotX; cam.lookAt(0,1.0+ex*0.3,0.3);
+  r.render(scene,cam); requestAnimationFrame(tick);
+}
+function fit(){const w=innerWidth||W,h=innerHeight||H;cam.aspect=w/h;cam.updateProjectionMatrix();r.setSize(w,h);}
+addEventListener('resize',fit); setTimeout(fit,300);
+tick();
+</script></body></html>
